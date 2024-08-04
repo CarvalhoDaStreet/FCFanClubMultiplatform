@@ -1,10 +1,10 @@
+import 'package:fc_fan_club/features/main/presentation/pages/main_page.dart';
 import 'package:fc_fan_club/features/news/data/datasources/news_api_service.dart';
 import 'package:fc_fan_club/features/news/data/repository/news_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fc_fan_club/features/news/domain/usecases/get_news_usecase.dart';
-import 'package:fc_fan_club/features/news/presentation/pages/news_page.dart';
 import 'package:fc_fan_club/features/news/presentation/bloc/news_bloc.dart';
 
 void main() {
@@ -38,9 +38,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Flutter Clean Architecture',
           theme: ThemeData(
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.grey,
           ),
-          home: NewsPage(),
+          home: MainPage(),
           debugShowCheckedModeBanner: false, // Hide the debug banner
         ),
       ),
