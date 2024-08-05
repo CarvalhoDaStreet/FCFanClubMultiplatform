@@ -2,6 +2,7 @@ import 'package:fc_fan_club/features/news/presentation/bloc/news_bloc.dart';
 import 'package:fc_fan_club/features/news/presentation/widgets/news_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NewsPage extends StatelessWidget {
   final int pageSize = 25;
@@ -12,9 +13,12 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             'News',
-            style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
+            style: GoogleFonts.roboto(
+              fontSize: 34,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           centerTitle: false,
         ),
