@@ -41,7 +41,7 @@ class FixturesModel extends Fixtures {
     return FixturesModel(
       id: json['fixture']?['id'] ?? 0,
       date: json['fixture']?['date'] ?? '',
-      status: json['fixture']?['status']?['long'] ?? '',
+      status: json['fixture']?['status']?['short'] ?? '',
       homeTeam: json['teams']?['home']?['name'] ?? '',
       awayTeam: json['teams']?['away']?['name'] ?? '',
       venue: json['fixture']?['venue']?['name'] ?? '',

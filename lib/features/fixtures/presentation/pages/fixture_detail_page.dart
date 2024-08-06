@@ -1,5 +1,7 @@
 import 'package:fc_fan_club/features/fixtures/domain/entities/fixture.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class FixtureDetailPage extends StatelessWidget {
   final Fixtures fixture;
@@ -8,54 +10,157 @@ class FixtureDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Parse the date string
+    DateTime parsedDate = DateTime.parse(fixture.date);
+
+    // Get the system locale
+    String systemLocale = Localizations.localeOf(context).toString();
+
+    // Format the date based on the system locale
+    DateFormat dateFormat = DateFormat('E.d MMM - HH:mm', systemLocale);
+    String formattedDate = dateFormat.format(parsedDate);
+    String gameDate = formattedDate;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fixture Details'),
+        title: Text(
+          fixture.league,
+          textAlign: TextAlign.left,
+          maxLines: 1,
+          style: GoogleFonts.roboto(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('League: ${fixture.league}'),
-            SizedBox(height: 8),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.network(fixture.leagueLogo, width: 24, height: 24),
-                SizedBox(width: 8),
-                Text(fixture.league),
+                SizedBox(
+                  width: 100, // Set a fixed width for both team columns
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.network(fixture.homeTeamLogo, width: 50, height: 50),
+                      const SizedBox(height: 15),
+                      Text(
+                        fixture.homeTeam,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      gameDate,
+                      textAlign: TextAlign.left,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.roboto(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    OutlinedButton(
+                      onPressed: () {
+                        print('Adicionado ao calendário TODO');
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.grey, width: 1.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        iconColor: Colors.grey,
+                        minimumSize: Size.zero,
+                        padding: const EdgeInsets.all(0),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        child: Row(
+                          children: [
+                            Icon(Icons.add, size: 20),
+                            Icon(Icons.calendar_month, size: 20),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 100, // Set the same fixed width for both team columns
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.network(fixture.awayTeamLogo, width: 50, height: 50),
+                      const SizedBox(height: 15),
+                      Text(
+                        fixture.awayTeam,
+                        textAlign: TextAlign.left,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.roboto(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 8),
-            Text('Date: ${fixture.date}'),
-            SizedBox(height: 8),
-            Text('Status: ${fixture.status}'),
-            SizedBox(height: 8),
-            Row(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                fixture.venue,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.roboto(
+                  fontSize: 12,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            const Divider(color: Colors.black, thickness: 1),
+            const Spacer(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.network(fixture.homeTeamLogo, width: 24, height: 24),
-                SizedBox(width: 8),
-                Text(fixture.homeTeam),
-                SizedBox(width: 16),
-                Text('vs'),
-                SizedBox(width: 16),
-                Text(fixture.awayTeam),
-                SizedBox(width: 8),
-                Image.network(fixture.awayTeamLogo, width: 24, height: 24),
+                const Icon(Icons.sports_soccer_rounded, color: Colors.grey, size: 50),
+                const SizedBox(height: 20),
+                Text(
+                  'No game information available yet',
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.roboto(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey,
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 8),
-            Text('Venue: ${fixture.venue}'),
-            SizedBox(height: 8),
-            Text('Goals: ${fixture.homeGoals} - ${fixture.awayGoals}'),
-            SizedBox(height: 8),
-            Text('Halftime Score: ${fixture.halftimeScore}'),
-            SizedBox(height: 8),
-            Text('Fulltime Score: ${fixture.fulltimeScore}'),
-            SizedBox(height: 8),
-            Text('Extratime Score: ${fixture.extratimeScore}'),
-            SizedBox(height: 8),
-            Text('Penalty Score: ${fixture.penaltyScore}'),
+            const Spacer()
           ],
         ),
       ),

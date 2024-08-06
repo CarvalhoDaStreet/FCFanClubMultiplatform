@@ -1,18 +1,59 @@
+import 'package:fc_fan_club/features/fixtures/domain/entities/fixture.dart';
 import 'package:fc_fan_club/features/fixtures/domain/usecases/get_fixtures_usecase.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_bloc.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_event.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_state.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/pages/fixtures_tab_page.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/pages/results_tab_page.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/pages/standings_tab_page.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/widgets/fixture_item_widget.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/widgets/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FixturesPage extends StatelessWidget {
-  final int next = 50;
-
+class FixturesPage extends StatefulWidget {
   const FixturesPage({super.key});
+
+  @override
+  _FixturesPageState createState() => _FixturesPageState();
+}
+
+class _FixturesPageState extends State<FixturesPage> with WidgetsBindingObserver {
+  late FixturesBloc _fixturesBloc;
+  List<Fixtures> _cachedFixtures = [];
+  bool _isFixturesLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _fixturesBloc = FixturesBloc(context.read<GetFixturesUseCase>());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _fixturesBloc.close();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
+      _clearCache();
+    }
+  }
+
+  void _clearCache() {
+    setState(() {
+      _cachedFixtures = [];
+      _isFixturesLoaded = false;
+    });
+  }
+
+  void _loadFixtures() {
+    if (!_isFixturesLoaded) {
+      _fixturesBloc.add(LoadFixturesEvent(50));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,42 +95,24 @@ class FixturesPage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: TabBarView(
             children: [
-              const FixturesTab(),
+              FixturesTab(
+                bloc: _fixturesBloc,
+                cachedFixtures: _cachedFixtures,
+                isFixturesLoaded: _isFixturesLoaded,
+                onFixturesLoaded: (fixtures) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      _cachedFixtures = fixtures;
+                      _isFixturesLoaded = true;
+                    });
+                  });
+                },
+              ),
               ResultsTab(),
               StandingsTab(),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class FixturesTab extends StatelessWidget {
-  final int next = 50;
-
-  const FixturesTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FixturesBloc(context.read<GetFixturesUseCase>())..add(LoadFixturesEvent(next)),
-      child: BlocBuilder<FixturesBloc, FixturesState>(
-        builder: (context, state) {
-          if (state is FixturesLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is FixturesLoaded) {
-            return ListView.builder(
-              itemCount: state.fixtures.length,
-              itemBuilder: (context, index) {
-                return FixtureItemWidget(fixture: state.fixtures[index]);
-              },
-            );
-          } else if (state is FixturesError) {
-            return const Center(child: Text('Failed to fetch fixtures'));
-          }
-          return Container();
-        },
       ),
     );
   }
