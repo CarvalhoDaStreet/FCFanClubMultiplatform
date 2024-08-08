@@ -18,4 +18,14 @@ class FixturesRepositoryImpl implements FixturesRepository {
       return DataFailed(e as DioException);
     }
   }
+
+  @override
+  Future<DataState<List<Fixtures>>> getResults(int last) async {
+    try {
+      final fixtures = await fixturesApiService.fetchResults(last);
+      return DataSuccess(fixtures);
+    } catch (e) {
+      return DataFailed(e as DioException);
+    }
+  }
 }

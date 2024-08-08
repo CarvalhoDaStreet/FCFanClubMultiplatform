@@ -10,4 +10,8 @@ class GetFixturesUseCase {
   Future<DataState<List<Fixtures>>> call(int next) {
     return fixturesRepository.getFixtures(next);
   }
+
+  Future<DataState<List<Fixtures>>> callResults(int next) {
+    return fixturesRepository.getResults(next);
+  }
 }

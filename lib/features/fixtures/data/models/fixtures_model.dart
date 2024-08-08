@@ -44,7 +44,7 @@ class FixturesModel extends Fixtures {
       status: json['fixture']?['status']?['short'] ?? '',
       homeTeam: json['teams']?['home']?['name'] ?? '',
       awayTeam: json['teams']?['away']?['name'] ?? '',
-      venue: json['fixture']?['venue']?['name'] ?? '',
+      venue: json['fixture']?['venue']?['name'] ?? 'Informação sobre o local não esta disponível',
       league: json['league']?['name'] ?? '',
       leagueLogo: json['league']?['logo'] ?? '',
       homeTeamLogo: json['teams']?['home']?['logo'] ?? '',

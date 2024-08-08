@@ -25,7 +25,7 @@ class FixtureDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           fixture.league,
-          textAlign: TextAlign.left,
+          textAlign: TextAlign.center,
           maxLines: 1,
           style: GoogleFonts.roboto(
             fontSize: 18,

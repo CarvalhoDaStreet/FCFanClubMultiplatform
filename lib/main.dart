@@ -1,4 +1,6 @@
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_event.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_event.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_bloc.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_event.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +12,7 @@ import 'package:fc_fan_club/features/news/presentation/bloc/news_bloc.dart';
 import 'package:fc_fan_club/features/fixtures/data/datasources/fixtures_api_service.dart';
 import 'package:fc_fan_club/features/fixtures/data/repository/fixtures_repository_impl.dart';
 import 'package:fc_fan_club/features/fixtures/domain/usecases/get_fixtures_usecase.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_bloc.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,6 +54,11 @@ class MyApp extends StatelessWidget {
             create: (context) => FixturesBloc(
               RepositoryProvider.of<GetFixturesUseCase>(context),
             )..add(const LoadFixturesEvent(50)),
+          ),
+          BlocProvider(
+            create: (context) => ResultsBloc(
+              RepositoryProvider.of<GetFixturesUseCase>(context),
+            )..add(const LoadResultsEvent(50)),
           ),
         ],
         child: MaterialApp(

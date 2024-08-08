@@ -40,4 +40,39 @@ class FixturesApiService {
       rethrow;
     }
   }
+
+  /////FETCH RESULTS
+  Future<List<FixturesModel>> fetchResults(int last) async {
+    try {
+      final response = await dio.get(
+        '${AppConfig.footballApiBaseUrl}/fixtures',
+        queryParameters: {'season': AppConfig.season, 'team': AppConfig.teamId, 'last': last, 'timezone': AppConfig.timezone},
+        options: Options(headers: {
+          'x-rapidapi-key': AppConfig.footballApiKey,
+          'x-rapidapi-host': AppConfig.xRapidapiHost,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data['response'] as List;
+        return data.map((json) => FixturesModel.fromJson(json)).toList();
+      } else {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+    } on DioException catch (e) {
+      print('DioException: ${e.message}');
+      throw DioException(
+        requestOptions: e.requestOptions,
+        response: e.response,
+        type: e.type,
+        error: e.error,
+      );
+    } catch (e) {
+      print('General Exception: $e');
+      rethrow;
+    }
+  }
 }

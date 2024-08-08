@@ -2,7 +2,7 @@ import 'package:fc_fan_club/features/fanspace/presentation/pages/fan_space_page.
 import 'package:fc_fan_club/features/gallery/presentation/pages/galleries_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fc_fan_club/features/news/presentation/pages/news_page.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/pages/fixtures_page.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/pages/fixtures/fixtures_page.dart';
 
 class MainPage extends StatefulWidget {
   @override

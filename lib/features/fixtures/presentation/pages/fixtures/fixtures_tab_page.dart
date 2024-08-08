@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fc_fan_club/features/fixtures/domain/entities/fixture.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_bloc.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_event.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures_state.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_bloc.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_state.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/widgets/fixture_item_widget.dart';
 
 class FixturesTab extends StatelessWidget {
@@ -22,10 +21,6 @@ class FixturesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isFixturesLoaded) {
-      bloc.add(LoadFixturesEvent(50));
-    }
-
     return BlocProvider.value(
       value: bloc,
       child: BlocBuilder<FixturesBloc, FixturesState>(
@@ -33,7 +28,9 @@ class FixturesTab extends StatelessWidget {
           if (state is FixturesLoading && !isFixturesLoaded) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is FixturesLoaded) {
-            onFixturesLoaded(state.fixtures);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              onFixturesLoaded(state.fixtures);
+            });
             return ListView.builder(
               itemCount: state.fixtures.length,
               itemBuilder: (context, index) {

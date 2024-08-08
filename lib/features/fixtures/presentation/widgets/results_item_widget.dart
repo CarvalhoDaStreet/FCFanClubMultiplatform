@@ -1,26 +1,21 @@
+import 'package:fc_fan_club/features/fixtures/presentation/pages/results/result_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fc_fan_club/features/fixtures/domain/entities/fixture.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/pages/fixtures/fixture_detail_page.dart';
-import 'package:intl/intl.dart';
 
-class FixtureItemWidget extends StatelessWidget {
+class ResultItemWidget extends StatelessWidget {
   final Fixtures fixture;
 
-  const FixtureItemWidget({super.key, required this.fixture});
+  const ResultItemWidget({super.key, required this.fixture});
 
   @override
   Widget build(BuildContext context) {
-    DateTime dateTime = DateTime.parse(fixture.date);
-    String formattedDate = DateFormat('dd.MMM').format(dateTime); // e.g., 19.May
-    String formattedTime = DateFormat('HH:mm').format(dateTime); // e.g., 16:00
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => FixtureDetailPage(fixture: fixture),
+            builder: (context) => ResultDetailPage(fixture: fixture),
           ),
         );
       },
@@ -64,7 +59,7 @@ class FixtureItemWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FixtureDetailPage(fixture: fixture),
+                        builder: (context) => ResultDetailPage(fixture: fixture),
                       ),
                     );
                   },
@@ -122,27 +117,39 @@ class FixtureItemWidget extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
-                      formattedDate,
-                      textAlign: TextAlign.right,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      formattedTime,
-                      textAlign: TextAlign.right,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          fixture.homeGoals?.toString() ?? 'TBA',
+                          textAlign: TextAlign.right,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.roboto(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          ' - ',
+                          style: GoogleFonts.roboto(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Text(
+                          fixture.awayGoals?.toString() ?? 'TBA',
+                          textAlign: TextAlign.right,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.roboto(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
