@@ -1,6 +1,11 @@
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_event.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_bloc.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_event.dart';
+import 'package:fc_fan_club/features/gameEvents/data/datasources/game_events_api_service.dart';
+import 'package:fc_fan_club/features/gameEvents/data/repository/game_events_repository_impl.dart';
+import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
+import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_bloc.dart';
+import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_event.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,6 +46,15 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => GetFixturesUseCase(RepositoryProvider.of<FixturesRepositoryImpl>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GameEventsApiService(RepositoryProvider.of<Dio>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GameEventsRepositoryImpl(RepositoryProvider.of<GameEventsApiService>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GetGameEventsUsecase(RepositoryProvider.of<GameEventsRepositoryImpl>(context)),
         ),
       ],
       child: MultiBlocProvider(

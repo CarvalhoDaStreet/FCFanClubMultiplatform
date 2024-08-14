@@ -1,5 +1,9 @@
 import 'package:fc_fan_club/features/fixtures/presentation/pages/results/result_detail_page.dart';
+import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
+import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_bloc.dart';
+import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fc_fan_club/features/fixtures/domain/entities/fixture.dart';
 
@@ -15,7 +19,12 @@ class ResultItemWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ResultDetailPage(fixture: fixture),
+            builder: (context) => BlocProvider(
+              create: (context) => GameEventsBloc(
+                RepositoryProvider.of<GetGameEventsUsecase>(context),
+              )..add(LoadGameEventsEvent(fixture.id)),
+              child: ResultDetailPage(fixture: fixture),
+            ),
           ),
         );
       },
@@ -59,7 +68,12 @@ class ResultItemWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ResultDetailPage(fixture: fixture),
+                        builder: (context) => BlocProvider(
+                          create: (context) => GameEventsBloc(
+                            RepositoryProvider.of<GetGameEventsUsecase>(context),
+                          )..add(LoadGameEventsEvent(fixture.id)),
+                          child: ResultDetailPage(fixture: fixture),
+                        ),
                       ),
                     );
                   },

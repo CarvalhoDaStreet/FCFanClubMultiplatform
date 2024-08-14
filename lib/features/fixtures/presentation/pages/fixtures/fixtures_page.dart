@@ -109,9 +109,10 @@ class _FixturesPageState extends State<FixturesPage> with WidgetsBindingObserver
                   controller: _tabController,
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
+                  padding: const EdgeInsets.all(5),
                   indicator: const BoxDecoration(
                     color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
                   ),
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.black,
