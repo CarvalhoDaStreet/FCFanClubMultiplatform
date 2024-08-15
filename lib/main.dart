@@ -4,8 +4,9 @@ import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_
 import 'package:fc_fan_club/features/gameEvents/data/datasources/game_events_api_service.dart';
 import 'package:fc_fan_club/features/gameEvents/data/repository/game_events_repository_impl.dart';
 import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
-import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_bloc.dart';
-import 'package:fc_fan_club/features/gameEvents/presentation/bloc/game_events_event.dart';
+import 'package:fc_fan_club/features/stats/data/datasources/stats_api_service.dart';
+import 'package:fc_fan_club/features/stats/data/repository/stats_repository_impl.dart';
+import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,6 +56,15 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => GetGameEventsUsecase(RepositoryProvider.of<GameEventsRepositoryImpl>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => FootballStatisticsApiService(RepositoryProvider.of<Dio>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => FootballStatisticsRepositoryImpl(RepositoryProvider.of<FootballStatisticsApiService>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GetFootballStatisticsUseCase(RepositoryProvider.of<FootballStatisticsRepositoryImpl>(context)),
         ),
       ],
       child: MultiBlocProvider(

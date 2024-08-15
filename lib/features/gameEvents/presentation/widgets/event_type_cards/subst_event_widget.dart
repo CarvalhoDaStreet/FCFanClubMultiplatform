@@ -25,7 +25,7 @@ class SubstitutionEventWidget extends StatelessWidget {
           crossAxisAlignment: isHomeTeamEvent ? CrossAxisAlignment.start : CrossAxisAlignment.end,
           children: [
             Text(
-              isHomeTeamEvent ? '${event.time.elapsed}\' ${event.player.name}' : '${event.player.name} ${event.time.elapsed}\'',
+              isHomeTeamEvent ? '${event.time.elapsed}\' ${event.assist?.name ?? 'Unknown'}' : '${event.assist?.name ?? 'Unknown'} ${event.time.elapsed}\'',
               style: GoogleFonts.roboto(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
@@ -33,7 +33,7 @@ class SubstitutionEventWidget extends StatelessWidget {
               ),
             ),
             Text(
-              '${event.assist?.name ?? 'Unknown'}',
+              '${event.player.name ?? 'Unknown'}',
               style: GoogleFonts.roboto(
                 fontSize: 12,
                 fontWeight: FontWeight.w300,

@@ -2,22 +2,14 @@ import 'package:fc_fan_club/features/gameEvents/domain/entities/game_event.dart'
 
 class GameEventModel extends GameEvent {
   GameEventModel({
-    required Time time,
-    required Team team,
-    required Player player,
-    Assist? assist,
-    required String type,
-    required String detail,
-    String? comments,
-  }) : super(
-          time: time,
-          team: team,
-          player: player,
-          assist: assist,
-          type: type,
-          detail: detail,
-          comments: comments,
-        );
+    required super.time,
+    required super.team,
+    required super.player,
+    super.assist,
+    required super.type,
+    required super.detail,
+    super.comments,
+  });
 
   factory GameEventModel.fromJson(Map<String, dynamic> json) {
     return GameEventModel(
@@ -33,7 +25,7 @@ class GameEventModel extends GameEvent {
 }
 
 class TimeModel extends Time {
-  TimeModel({required int elapsed, int? extra}) : super(elapsed: elapsed, extra: extra);
+  TimeModel({required super.elapsed, super.extra});
 
   factory TimeModel.fromJson(Map<String, dynamic> json) {
     return TimeModel(
@@ -44,7 +36,7 @@ class TimeModel extends Time {
 }
 
 class TeamModel extends Team {
-  TeamModel({required int id, required String name, required String logo}) : super(id: id, name: name, logo: logo);
+  TeamModel({required super.id, required super.name, required super.logo});
 
   factory TeamModel.fromJson(Map<String, dynamic> json) {
     return TeamModel(
@@ -56,7 +48,7 @@ class TeamModel extends Team {
 }
 
 class PlayerModel extends Player {
-  PlayerModel({required int id, required String name}) : super(id: id, name: name);
+  PlayerModel({required super.id, required super.name});
 
   factory PlayerModel.fromJson(Map<String, dynamic> json) {
     return PlayerModel(
@@ -67,7 +59,7 @@ class PlayerModel extends Player {
 }
 
 class AssistModel extends Assist {
-  AssistModel({int? id, String? name}) : super(id: id, name: name);
+  AssistModel({super.id, super.name});
 
   factory AssistModel.fromJson(Map<String, dynamic> json) {
     return AssistModel(
