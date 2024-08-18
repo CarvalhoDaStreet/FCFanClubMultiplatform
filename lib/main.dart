@@ -4,6 +4,10 @@ import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_
 import 'package:fc_fan_club/features/gameEvents/data/datasources/game_events_api_service.dart';
 import 'package:fc_fan_club/features/gameEvents/data/repository/game_events_repository_impl.dart';
 import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
+import 'package:fc_fan_club/features/lineups/data/datasources/lineup_api_service.dart';
+import 'package:fc_fan_club/features/lineups/data/repository/lineup_repository_impl.dart';
+import 'package:fc_fan_club/features/lineups/domain/usecases/get_lineup_usecase.dart';
+import 'package:fc_fan_club/features/lineups/presentation/bloc/lineup_bloc.dart';
 import 'package:fc_fan_club/features/stats/data/datasources/stats_api_service.dart';
 import 'package:fc_fan_club/features/stats/data/repository/stats_repository_impl.dart';
 import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
@@ -65,6 +69,15 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => GetFootballStatisticsUseCase(RepositoryProvider.of<FootballStatisticsRepositoryImpl>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => LineupsApiService(RepositoryProvider.of<Dio>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => LineupsRepositoryImpl(RepositoryProvider.of<LineupsApiService>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GetLineupsUseCase(RepositoryProvider.of<LineupsRepositoryImpl>(context)),
         ),
       ],
       child: MultiBlocProvider(

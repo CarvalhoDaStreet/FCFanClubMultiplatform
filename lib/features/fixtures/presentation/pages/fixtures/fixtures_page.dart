@@ -10,6 +10,7 @@ import 'package:fc_fan_club/features/fixtures/presentation/pages/standings/stand
 import 'package:fc_fan_club/features/fixtures/presentation/widgets/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FixturesPage extends StatefulWidget {
   const FixturesPage({super.key});
@@ -112,9 +113,10 @@ class _FixturesPageState extends State<FixturesPage> with WidgetsBindingObserver
                   padding: const EdgeInsets.all(5),
                   indicator: const BoxDecoration(
                     color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
                   labelColor: Colors.white,
+                  labelStyle: GoogleFonts.roboto(fontWeight: FontWeight.normal),
                   unselectedLabelColor: Colors.black,
                   tabs: const [
                     TabItem(title: 'Fixtures'),

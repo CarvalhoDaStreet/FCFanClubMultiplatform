@@ -1,5 +1,9 @@
 import 'package:fc_fan_club/features/gameEvents/presentation/widgets/main/game_events_widget.dart';
 import 'package:fc_fan_club/features/gameEvents/presentation/widgets/main/player_who_scored_widget.dart';
+import 'package:fc_fan_club/features/lineups/domain/usecases/get_lineup_usecase.dart';
+import 'package:fc_fan_club/features/lineups/presentation/bloc/lineup_bloc.dart';
+import 'package:fc_fan_club/features/lineups/presentation/bloc/lineup_event.dart';
+import 'package:fc_fan_club/features/lineups/presentation/widgets/lineup_widget.dart';
 import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
 import 'package:fc_fan_club/features/stats/presentation/bloc/stats_bloc.dart';
 import 'package:fc_fan_club/features/stats/presentation/bloc/stats_event.dart';
@@ -22,10 +26,19 @@ class ResultDetailPage extends StatelessWidget {
     DateFormat dateFormat = DateFormat('EEE d MMM - HH:mm', systemLocale);
     String formattedDate = dateFormat.format(parsedDate);
 
-    return BlocProvider(
-      create: (context) => FootballStatisticsBloc(
-        RepositoryProvider.of<GetFootballStatisticsUseCase>(context),
-      )..add(LoadFootballStatisticsEvent(fixture.id)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => FootballStatisticsBloc(
+            RepositoryProvider.of<GetFootballStatisticsUseCase>(context),
+          )..add(LoadFootballStatisticsEvent(fixture.id)),
+        ),
+        BlocProvider(
+          create: (context) => LineupsBloc(
+            RepositoryProvider.of<GetLineupsUseCase>(context),
+          )..add(LoadLineupsEvent(fixture.id)),
+        ),
+      ],
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -254,7 +267,10 @@ class ResultDetailPage extends StatelessWidget {
                       child: FootballStatisticsWidget(fixtureId: fixture.id),
                     ),
                     // Line-ups tab (placeholder)
-                    Center(child: Text('Line-ups content will go here')),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: LineupsWidget(fixtureId: fixture.id),
+                    ),
                   ],
                 ),
               ),
