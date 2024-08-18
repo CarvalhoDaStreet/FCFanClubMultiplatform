@@ -1,3 +1,4 @@
+import 'package:fc_fan_club/config/constants/config.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_event.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_bloc.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_event.dart';
@@ -8,6 +9,11 @@ import 'package:fc_fan_club/features/lineups/data/datasources/lineup_api_service
 import 'package:fc_fan_club/features/lineups/data/repository/lineup_repository_impl.dart';
 import 'package:fc_fan_club/features/lineups/domain/usecases/get_lineup_usecase.dart';
 import 'package:fc_fan_club/features/lineups/presentation/bloc/lineup_bloc.dart';
+import 'package:fc_fan_club/features/standings/data/datasources/standings_api_service.dart';
+import 'package:fc_fan_club/features/standings/data/repository/standings_repository_impl.dart';
+import 'package:fc_fan_club/features/standings/domain/usecases/get_standings_usecase.dart';
+import 'package:fc_fan_club/features/standings/presentation/bloc/standings_bloc.dart';
+import 'package:fc_fan_club/features/standings/presentation/bloc/standings_event.dart';
 import 'package:fc_fan_club/features/stats/data/datasources/stats_api_service.dart';
 import 'package:fc_fan_club/features/stats/data/repository/stats_repository_impl.dart';
 import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
@@ -79,6 +85,15 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => GetLineupsUseCase(RepositoryProvider.of<LineupsRepositoryImpl>(context)),
         ),
+        RepositoryProvider(
+          create: (context) => StandingsApiService(RepositoryProvider.of<Dio>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => StandingsRepositoryImpl(RepositoryProvider.of<StandingsApiService>(context)),
+        ),
+        RepositoryProvider(
+          create: (context) => GetStandingsUseCase(RepositoryProvider.of<StandingsRepositoryImpl>(context)),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -96,6 +111,11 @@ class MyApp extends StatelessWidget {
             create: (context) => ResultsBloc(
               RepositoryProvider.of<GetFixturesUseCase>(context),
             )..add(const LoadResultsEvent(50)),
+          ),
+          BlocProvider(
+            create: (context) => StandingsBloc(
+              RepositoryProvider.of<GetStandingsUseCase>(context),
+            )..add(const LoadStandingsEvent(AppConfig.leagueId, AppConfig.season)),
           ),
         ],
         child: MaterialApp(

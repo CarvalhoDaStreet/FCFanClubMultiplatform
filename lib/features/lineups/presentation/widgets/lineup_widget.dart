@@ -18,6 +18,9 @@ class LineupsWidget extends StatelessWidget {
         if (state is LineupsLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is LineupsLoaded) {
+          if (state.lineups.response.isEmpty) {
+            return _buildPlaceholder();
+          }
           return _buildLineups(context, state.lineups);
         } else if (state is LineupsError) {
           return Center(child: Text(state.message));
@@ -25,6 +28,34 @@ class LineupsWidget extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _buildPlaceholder() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.sports_soccer, size: 64, color: Colors.grey[400]),
+          const SizedBox(height: 16),
+          Text(
+            'Lineup information not available',
+            style: GoogleFonts.roboto(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Check later for updates',
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: Colors.grey[500],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -108,10 +139,6 @@ class LineupsWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    homeTeam.team.name,
-                    style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
                   ...homeTeam.substitutes.map((player) => _buildSubstituteItem(player, isHome: true)),
                 ],
               ),
@@ -120,10 +147,6 @@ class LineupsWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    awayTeam.team.name,
-                    style: GoogleFonts.roboto(fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
                   ...awayTeam.substitutes.map((player) => _buildSubstituteItem(player, isHome: false)),
                 ],
               ),
