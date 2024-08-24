@@ -17,6 +17,9 @@ class FootballStatisticsWidget extends StatelessWidget {
         if (state is FootballStatisticsLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is FootballStatisticsLoaded) {
+          if (state.footballStatistics.response.length != 2) {
+            return _buildPlaceholder();
+          }
           return _buildStatisticsGraph(state.footballStatistics);
         } else if (state is FootballStatisticsError) {
           return Center(child: Text(state.message));
@@ -24,6 +27,34 @@ class FootballStatisticsWidget extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _buildPlaceholder() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.bar_chart, size: 64, color: Colors.grey[400]),
+          const SizedBox(height: 16),
+          Text(
+            'Match statistics not available',
+            style: GoogleFonts.roboto(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey[600],
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Check later for updates',
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: Colors.grey[500],
+            ),
+          ),
+        ],
+      ),
     );
   }
 

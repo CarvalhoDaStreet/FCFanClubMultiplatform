@@ -57,6 +57,11 @@ class NewsItemWidget extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Allow the modal to take up more space
+      backgroundColor: Colors.white,
+      transitionAnimationController: AnimationController(
+        duration: const Duration(milliseconds: 500),
+        vsync: Navigator.of(context),
+      ),
       builder: (BuildContext context) {
         return SafeArea(
           child: Container(
