@@ -12,7 +12,7 @@ class GameEventsWidget extends StatelessWidget {
   final int homeTeamId;
   final int awayTeamId;
 
-  const GameEventsWidget({required this.homeTeamId, required this.awayTeamId});
+  const GameEventsWidget({super.key, required this.homeTeamId, required this.awayTeamId});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class GameEventsWidget extends StatelessWidget {
           } else {
             return ListView.builder(
               shrinkWrap: true,
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               itemCount: state.gameEvents.length,
               itemBuilder: (context, index) {
                 final event = state.gameEvents[index];

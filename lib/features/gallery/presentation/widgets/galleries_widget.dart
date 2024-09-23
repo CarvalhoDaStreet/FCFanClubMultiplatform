@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GalleriesWidget extends StatelessWidget {
-  const GalleriesWidget({Key? key}) : super(key: key);
+  const GalleriesWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

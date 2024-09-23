@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StandingsWidget extends StatelessWidget {
-  const StandingsWidget({Key? key}) : super(key: key);
+  const StandingsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +61,10 @@ class StandingsWidget extends StatelessWidget {
                 _buildTableHeader('PT'),
               ],
             ),
-            ...league.standings.map((standing) => _buildTableRow(standing)).toList(),
+            ...league.standings.map((standing) => _buildTableRow(standing)),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         _buildLegend(statusColors),
       ],
     );
@@ -123,7 +123,7 @@ class StandingsWidget extends StatelessWidget {
             height: 20,
             color: _getStatusColor(standing.description),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           Text(
             standing.rank.toString(),
             style: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),

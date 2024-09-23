@@ -10,10 +10,10 @@ class FullGalleryPage extends StatefulWidget {
   final int initialIndex;
 
   const FullGalleryPage({
-    Key? key,
+    super.key,
     required this.gallery,
     required this.initialIndex,
-  }) : super(key: key);
+  });
 
   @override
   _FullGalleryPageState createState() => _FullGalleryPageState();

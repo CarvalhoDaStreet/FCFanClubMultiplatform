@@ -1,29 +1,11 @@
-import 'package:fc_fan_club/config/constants/config.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_event.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_bloc.dart';
-import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_event.dart';
-import 'package:fc_fan_club/features/gallery/data/datasources/galleries_api_service.dart';
-import 'package:fc_fan_club/features/gallery/data/repository/galleries_repository_impl.dart';
-import 'package:fc_fan_club/features/gallery/domain/usecases/get_galleries_usecase.dart';
-import 'package:fc_fan_club/features/gallery/presentation/bloc/galleries_bloc.dart';
-import 'package:fc_fan_club/features/gallery/presentation/bloc/galleries_event.dart';
-import 'package:fc_fan_club/features/gameEvents/data/datasources/game_events_api_service.dart';
-import 'package:fc_fan_club/features/gameEvents/data/repository/game_events_repository_impl.dart';
-import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
 import 'package:fc_fan_club/features/lineups/data/datasources/lineup_api_service.dart';
 import 'package:fc_fan_club/features/lineups/data/repository/lineup_repository_impl.dart';
 import 'package:fc_fan_club/features/lineups/domain/usecases/get_lineup_usecase.dart';
-import 'package:fc_fan_club/features/standings/data/datasources/standings_api_service.dart';
-import 'package:fc_fan_club/features/standings/data/repository/standings_repository_impl.dart';
-import 'package:fc_fan_club/features/standings/domain/usecases/get_standings_usecase.dart';
-import 'package:fc_fan_club/features/standings/presentation/bloc/standings_bloc.dart';
-import 'package:fc_fan_club/features/standings/presentation/bloc/standings_event.dart';
-import 'package:fc_fan_club/features/stats/data/datasources/stats_api_service.dart';
-import 'package:fc_fan_club/features/stats/data/repository/stats_repository_impl.dart';
-import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
+
 import 'package:fc_fan_club/features/main/presentation/pages/main_page.dart';
 import 'package:fc_fan_club/features/news/data/datasources/news_api_service.dart';
 import 'package:fc_fan_club/features/news/data/repository/news_repository_impl.dart';
@@ -33,12 +15,27 @@ import 'package:fc_fan_club/features/fixtures/data/datasources/fixtures_api_serv
 import 'package:fc_fan_club/features/fixtures/data/repository/fixtures_repository_impl.dart';
 import 'package:fc_fan_club/features/fixtures/domain/usecases/get_fixtures_usecase.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_bloc.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/fixtures/fixtures_event.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_bloc.dart';
+import 'package:fc_fan_club/features/fixtures/presentation/bloc/results/results_event.dart';
+import 'package:fc_fan_club/features/gameEvents/data/datasources/game_events_api_service.dart';
+import 'package:fc_fan_club/features/gameEvents/data/repository/game_events_repository_impl.dart';
+import 'package:fc_fan_club/features/gameEvents/domain/usecases/get_game_events_usecase.dart';
+import 'package:fc_fan_club/features/stats/data/datasources/stats_api_service.dart';
+import 'package:fc_fan_club/features/stats/data/repository/stats_repository_impl.dart';
+import 'package:fc_fan_club/features/stats/domain/usecases/get_stats_usecase.dart';
+import 'package:fc_fan_club/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:fc_fan_club/features/auth/presentation/bloc/auth_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
@@ -90,22 +87,7 @@ class MyApp extends StatelessWidget {
           create: (context) => GetLineupsUseCase(RepositoryProvider.of<LineupsRepositoryImpl>(context)),
         ),
         RepositoryProvider(
-          create: (context) => StandingsApiService(RepositoryProvider.of<Dio>(context)),
-        ),
-        RepositoryProvider(
-          create: (context) => StandingsRepositoryImpl(RepositoryProvider.of<StandingsApiService>(context)),
-        ),
-        RepositoryProvider(
-          create: (context) => GetStandingsUseCase(RepositoryProvider.of<StandingsRepositoryImpl>(context)),
-        ),
-        RepositoryProvider(
-          create: (context) => GalleriesApiService(RepositoryProvider.of<Dio>(context)),
-        ),
-        RepositoryProvider(
-          create: (context) => GalleriesRepositoryImpl(RepositoryProvider.of<GalleriesApiService>(context)),
-        ),
-        RepositoryProvider(
-          create: (context) => GetGalleriesUseCase(RepositoryProvider.of<GalleriesRepositoryImpl>(context)),
+          create: (context) => AuthRepositoryImpl(),
         ),
       ],
       child: MultiBlocProvider(
@@ -126,23 +108,19 @@ class MyApp extends StatelessWidget {
             )..add(const LoadResultsEvent(50)),
           ),
           BlocProvider(
-            create: (context) => StandingsBloc(
-              RepositoryProvider.of<GetStandingsUseCase>(context),
-            )..add(const LoadStandingsEvent(AppConfig.leagueId, AppConfig.season)),
-          ),
-          BlocProvider(
-            create: (context) => GalleriesBloc(
-              RepositoryProvider.of<GetGalleriesUseCase>(context),
-            )..add(LoadGalleriesEvent()),
+            create: (context) => AuthBloc(
+              authRepository: RepositoryProvider.of<AuthRepositoryImpl>(context),
+            )..add(AuthCheckRequested()),
           ),
         ],
         child: MaterialApp(
-          title: 'Flutter Clean Architecture',
+          title: 'FC Fan Club',
           theme: ThemeData(
-            primarySwatch: Colors.grey,
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: MainPage(),
-          debugShowCheckedModeBanner: false, // Hide the debug banner
+          home: const MainPage(),
+          debugShowCheckedModeBanner: false,
         ),
       ),
     );

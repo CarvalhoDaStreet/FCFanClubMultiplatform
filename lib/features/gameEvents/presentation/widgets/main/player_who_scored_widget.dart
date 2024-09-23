@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 class GoalScorersWidget extends StatelessWidget {
   final int teamId;
 
-  const GoalScorersWidget({required this.teamId});
+  const GoalScorersWidget({super.key, required this.teamId});
 
   @override
   Widget build(BuildContext context) {

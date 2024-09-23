@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>390982908203-un84au0gau2783rep3551dkc2ucqn9ko.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.390982908203-un84au0gau2783rep3551dkc2ucqn9ko</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>390982908203-avv510plbjmqm3a4aokra0g210f7sblj.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBys2k6AQ6h0lMj6PYyrPFw4YqoZGcX_0E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>390982908203</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pue.fcfanclub</string>
+	<key>PROJECT_ID</key>
+	<string>fcfanclub-6e513</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fcfanclub-6e513.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:390982908203:ios:43af1f7aea6163ec9ced6e</string>
+</dict>
+</plist>

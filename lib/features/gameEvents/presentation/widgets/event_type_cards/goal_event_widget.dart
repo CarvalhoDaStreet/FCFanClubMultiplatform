@@ -5,7 +5,7 @@ class GoalEventWidget extends StatelessWidget {
   final dynamic event;
   final bool isHomeTeamEvent;
 
-  const GoalEventWidget({Key? key, required this.event, required this.isHomeTeamEvent}) : super(key: key);
+  const GoalEventWidget({super.key, required this.event, required this.isHomeTeamEvent});
 
   @override
   Widget build(BuildContext context) {

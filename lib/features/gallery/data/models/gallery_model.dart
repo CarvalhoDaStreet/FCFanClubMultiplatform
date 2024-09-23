@@ -3,16 +3,11 @@ import 'package:fc_fan_club/features/gallery/domain/entities/gallery.dart';
 
 class GalleryModel extends Gallery {
   GalleryModel({
-    required int id,
-    required String title,
-    required DateTime publishingDate,
-    required List<PhotoModel> photos,
-  }) : super(
-          id: id,
-          title: title,
-          publishingDate: publishingDate,
-          photos: photos,
-        );
+    required super.id,
+    required super.title,
+    required super.publishingDate,
+    required List<PhotoModel> super.photos,
+  });
 
   factory GalleryModel.fromJson(Map<String, dynamic> json) {
     return GalleryModel(
@@ -26,16 +21,11 @@ class GalleryModel extends Gallery {
 
 class PhotoModel extends Photo {
   PhotoModel({
-    required int id,
-    required String url,
-    required int width,
-    required int height,
-  }) : super(
-          id: id,
-          url: url,
-          width: width,
-          height: height,
-        );
+    required super.id,
+    required super.url,
+    required super.width,
+    required super.height,
+  });
 
   factory PhotoModel.fromJson(Map<String, dynamic> json) {
     return PhotoModel(

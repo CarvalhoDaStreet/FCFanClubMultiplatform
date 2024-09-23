@@ -1,4 +1,4 @@
-package com.example.fc_fan_club
+package com.pue.fcfanclub
 
 import io.flutter.embedding.android.FlutterActivity
 

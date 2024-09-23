@@ -5,6 +5,8 @@ import 'package:fc_fan_club/features/news/presentation/pages/news_page.dart';
 import 'package:fc_fan_club/features/fixtures/presentation/pages/fixtures/fixtures_page.dart';
 
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -13,11 +15,11 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
-    NewsPage(),
-    FixturesPage(),
-    GalleriesPage(),
-    FanSpacePage(),
+    const HomePage(),
+    const NewsPage(),
+    const FixturesPage(),
+    const GalleriesPage(),
+    const FanSpacePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -65,13 +67,15 @@ class _MainPageState extends State<MainPage> {
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Home Page'),
       ),
     );

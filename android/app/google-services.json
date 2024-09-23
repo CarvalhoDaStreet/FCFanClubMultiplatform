@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "390982908203",
+    "project_id": "fcfanclub-6e513",
+    "storage_bucket": "fcfanclub-6e513.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390982908203:android:c694915d3ef9f5bb9ced6e",
+        "android_client_info": {
+          "package_name": "com.pue.fcfanclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390982908203-j1p57d857b01drrfh8mancqn63bv97nr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYEZw55G4SogDM2qPZm3CjVIoLFQnQ89I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390982908203-j1p57d857b01drrfh8mancqn63bv97nr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "390982908203-b8j8a8ljj3ugl4o7amrct13s2tre2j5n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pue.fcFanClub"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@ class CardEventWidget extends StatelessWidget {
   final dynamic event;
   final bool isHomeTeamEvent;
 
-  const CardEventWidget({Key? key, required this.event, required this.isHomeTeamEvent}) : super(key: key);
+  const CardEventWidget({super.key, required this.event, required this.isHomeTeamEvent});
 
   @override
   Widget build(BuildContext context) {

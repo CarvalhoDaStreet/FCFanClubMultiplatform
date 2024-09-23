@@ -5,7 +5,7 @@ class SubstitutionEventWidget extends StatelessWidget {
   final dynamic event;
   final bool isHomeTeamEvent;
 
-  const SubstitutionEventWidget({Key? key, required this.event, required this.isHomeTeamEvent}) : super(key: key);
+  const SubstitutionEventWidget({super.key, required this.event, required this.isHomeTeamEvent});
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 class LineupsWidget extends StatelessWidget {
   final int fixtureId;
 
-  const LineupsWidget({Key? key, required this.fixtureId}) : super(key: key);
+  const LineupsWidget({super.key, required this.fixtureId});
 
   @override
   Widget build(BuildContext context) {

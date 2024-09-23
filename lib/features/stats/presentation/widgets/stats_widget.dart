@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class FootballStatisticsWidget extends StatelessWidget {
   final int fixtureId;
 
-  const FootballStatisticsWidget({Key? key, required this.fixtureId}) : super(key: key);
+  const FootballStatisticsWidget({super.key, required this.fixtureId});
 
   @override
   Widget build(BuildContext context) {

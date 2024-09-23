@@ -5,7 +5,7 @@ class DefaultEventWidget extends StatelessWidget {
   final dynamic event;
   final bool isHomeTeamEvent;
 
-  const DefaultEventWidget({Key? key, required this.event, required this.isHomeTeamEvent}) : super(key: key);
+  const DefaultEventWidget({super.key, required this.event, required this.isHomeTeamEvent});
 
   @override
   Widget build(BuildContext context) {

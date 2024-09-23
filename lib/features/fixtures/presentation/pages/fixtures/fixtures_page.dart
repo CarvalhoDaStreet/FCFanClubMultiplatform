@@ -163,7 +163,7 @@ class _FixturesPageState extends State<FixturesPage> with WidgetsBindingObserver
                   });
                 },
               ),
-              StandingsTab(),
+              const StandingsTab(),
             ],
           ),
         ),

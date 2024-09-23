@@ -17,7 +17,7 @@ import 'package:intl/intl.dart';
 class ResultDetailPage extends StatelessWidget {
   final Fixtures fixture;
 
-  const ResultDetailPage({Key? key, required this.fixture}) : super(key: key);
+  const ResultDetailPage({super.key, required this.fixture});
 
   @override
   Widget build(BuildContext context) {

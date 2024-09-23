@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class FixtureDetailPage extends StatelessWidget {
   final Fixtures fixture;
 
-  const FixtureDetailPage({required this.fixture});
+  const FixtureDetailPage({super.key, required this.fixture});
 
   @override
   Widget build(BuildContext context) {
