@@ -81,8 +81,4 @@ Robust error handling is implemented throughout the app:
 
 
 
-Uploading Simulator Screen Recording - iPhone 15 Pro - 2024-10-14 at 12.09.41.mp4…
-
-
-
 
