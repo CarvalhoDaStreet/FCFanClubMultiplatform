@@ -1,7 +1,7 @@
 # Football Fan Club Mobile App
 
 ## Overview
-This Flutter-based mobile application serves as a prototype for local football team fan clubs. It demonstrates advanced mobile app architecture, efficient state management, and seamless integration with real-time sports data APIs.
+This Flutter-based mobile application serves as a prototype for local football teams. It demonstrates advanced mobile app architecture, efficient state management, and seamless integration with real-time sports data APIs.
 
 ## Features
 - News Feed
