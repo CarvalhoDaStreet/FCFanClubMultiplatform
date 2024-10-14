@@ -4,7 +4,7 @@
 This Flutter-based mobile application serves as a prototype for local football team fan clubs. It demonstrates advanced mobile app architecture, efficient state management, and seamless integration with real-time sports data APIs.
 
 ## Features
-- News Feed with pagination
+- News Feed
 - Interactive Fixtures and Results display
 - Detailed Match Statistics and Lineups
 - Photo Galleries
@@ -64,11 +64,6 @@ Several strategies are employed to ensure smooth app performance:
 - Pagination implemented for data-heavy features like news feed
 - Debouncing of user inputs to reduce unnecessary API calls
 
-### Dependency Injection
-Get_it package is used for dependency injection:
-
-- Services and BLoCs are registered as singletons or factories
-- This approach facilitates easier testing and modular development
 
 ### Error Handling
 Robust error handling is implemented throughout the app:
@@ -77,19 +72,6 @@ Robust error handling is implemented throughout the app:
 - Error states in BLoCs to inform UI of issues
 - User-friendly error messages displayed using snackbars or dialogs
 
-### Testing
-The project includes a comprehensive test suite:
-
-- Unit tests for business logic in use cases and repositories
-- Widget tests for UI components
-- Integration tests to ensure feature cohesion
-
-### Continuous Integration
-GitHub Actions is used for CI/CD:
-
-- Automated builds and tests on each push
-- Code quality checks using static analysis tools
-- Automated deployment to beta testing platforms
 
 ## Future Enhancements
 - Implement push notifications for match updates and team news
