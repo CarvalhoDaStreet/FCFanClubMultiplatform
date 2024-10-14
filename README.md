@@ -56,15 +56,6 @@ The user interface is built with a focus on responsiveness and custom widgets:
 - Material Design principles are followed for consistent look and feel
 - Adaptive layouts ensure proper display across various device sizes
 
-### Performance Optimization
-Several strategies are employed to ensure smooth app performance:
-
-- Efficient list rendering using ListView.builder
-- Image caching for faster loading of previously viewed images
-- Pagination implemented for data-heavy features like news feed
-- Debouncing of user inputs to reduce unnecessary API calls
-
-
 ### Error Handling
 Robust error handling is implemented throughout the app:
 
